@@ -99,7 +99,7 @@ function returnArgumentsArray(...args) {
  */
 function bindFunction(fn, ...args) {
   //my code
-  return () => fetch(...args);
+  return () => fn(...args);
 }
 
 export {
