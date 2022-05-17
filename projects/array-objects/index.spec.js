@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+'use strict';
+
 import { randomNumberArray } from '../../scripts/helper';
 import { createProxy, forEach, map, reduce, upperProps } from './index';
 
