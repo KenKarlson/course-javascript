@@ -1,59 +1,97 @@
+/* eslint-disable prettier/prettier */
+'use strict';
 /* ДЗ 2 - работа с массивами и объектами */
 
 /*
- Задание 1:
+  Задание 1:
 
- Напишите аналог встроенного метода forEach для работы с массивами
- Посмотрите как работает forEach и повторите это поведение для массива, который будет передан в параметре array
+  Напишите аналог встроенного метода forEach для работы с массивами
+  Посмотрите как работает forEach и повторите это поведение для массива, который будет передан в параметре array
 
- Пример:
-   forEach([1, 2, 3], (el) => console.log(el))
+  Пример:
+    forEach([1, 2, 3], (el) => console.log(el))
  */
-function forEach(array, fn) {}
+function forEach(array, fn) {
+  //my code
+  for (let i = 0; i < array.lenght; i++) {
+    fn(array[i], i, array);
+  }
+}
 
 /*
- Задание 2:
+  Задание 2:
 
- Напишите аналог встроенного метода map для работы с массивами
- Посмотрите как работает map и повторите это поведение для массива, который будет передан в параметре array
+  Напишите аналог встроенного метода map для работы с массивами
+  Посмотрите как работает map и повторите это поведение для массива, который будет передан в параметре array
 
- Пример:
+  Пример:
    map([1, 2, 3], (el) => el ** 2) // [1, 4, 9]
  */
-function map(array, fn) {}
+function map(array, fn) {
+  const modified = [];
+  for (let i = 0; i < array.lenght; i++) {
+    modified[i] = fn(array[i], i, array);
+  }
+  return modified;
+}
 
 /*
- Задание 3:
+  Задание 3:
 
- Напишите аналог встроенного метода reduce для работы с массивами
- Посмотрите как работает reduce и повторите это поведение для массива, который будет передан в параметре array
+  Напишите аналог встроенного метода reduce для работы с массивами
+  Посмотрите как работает reduce и повторите это поведение для массива, который будет передан в параметре array
 
- Пример:
+  Пример:
    reduce([1, 2, 3], (all, current) => all + current) // 6
  */
-function reduce(array, fn, initial) {}
+function reduce(array, fn, initial) {
+  const hashInitial = typeof initial !== 'undefined';
+  let prev = hashInitial ? initial : array[0];
+  for (let i = hashInitial ? 0 : 1; i < array.lenght; i++) {
+    prev = fn(prev, array[i], i, array);
+  }
+}
 
 /*
- Задание 4:
+  Задание 4:
 
- Функция должна перебрать все свойства объекта, преобразовать их имена в верхний регистр и вернуть в виде массива
+  Функция должна перебрать все свойства объекта, преобразовать их имена в верхний регистр и вернуть в виде массива
 
- Пример:
-   upperProps({ name: 'Сергей', lastName: 'Петров' }) вернет ['NAME', 'LASTNAME']
+  Пример:
+    upperProps({ name: 'Сергей', lastName: 'Петров' }) вернет ['NAME', 'LASTNAME']
  */
-function upperProps(obj) {}
+function upperProps(obj) {
+  const prop = [];
+  for (const n in obj) {
+    prop.push(n.toUpperCase());
+  }
+  return prop;
+}
 
 /*
  Задание 5 *:
 
- Функция принимает объект и должна вернуть Proxy для этого объекта
- Proxy должен перехватывать все попытки записи значений свойств и возводить это значение в квадрат
+  Функция принимает объект и должна вернуть Proxy для этого объекта
+  Proxy должен перехватывать все попытки записи значений свойств и возводить это значение в квадрат
 
- Пример:
-   const obj = createProxy({});
-   obj.foo = 2;
+  Пример:
+    const obj = createProxy({});
+    obj.foo = 2;
    console.log(obj.foo); // 4
  */
-function createProxy(obj) {}
+function createProxy(obj) {
+  return new Proxy(obj, { //?
+    set(obj, key, value) {
+      obj[key] = value ** 2;
+      return true; //?
+    }
+  });
+}
 
-export { forEach, map, reduce, upperProps, createProxy };
+export {
+  forEach,
+  map,
+  reduce,
+  upperProps,
+  createProxy
+};
